@@ -9,22 +9,19 @@ outputFile = open("./output_file.txt", 'w')
 distance = int(input("Enter distance value: "))
 
 cipherTxt = ""
+plainTxt = ""
 
 while True:
     line = inputFile.readline()
     if line == "":
         break
 
-    for ch in line:
-        ordVal = ord(ch)
-        cipherVal = ordVal + distance
-
-        if cipherVal > ord('z'):
-            cipherVal = ord('a') + distance - (ord('z') - ordVal + 1)
-        if ch == " ":
-            cipherTxt += "#"
+    for i in range(len(line)):
+        char = line[i]
+        if char.isupper():
+            cipherTxt += chr((ord(char) + distance - 65) % 26 + 65)
         else:
-            cipherTxt += chr(cipherVal)
+            cipherTxt += chr((ord(char) + distance - 97) % 26 + 97)
 
 inputFile.close()
 
